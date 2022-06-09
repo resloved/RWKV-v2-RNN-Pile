@@ -55,7 +55,7 @@ class TimeX(torch.autograd.Function):
 ########################################################################################################
 
 RWKV_K_CLAMP = 60  # e^60 = 1e26
-RWKV_K_EPS = 1e-9
+RWKV_K_EPS = 1e-8
 RWKV_HEAD_QK_DIM = 256
 
 # def RWKV_Init(module, config):  # fancy initialization of all lin & emb layer in the module

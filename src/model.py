@@ -20,7 +20,7 @@ ctx_len = 768
 n_layer = 24
 n_embd = 1024
 
-MODEL_NAME = '20220524-4006'
+MODEL_NAME = '20220605-7663'
 
 vocab_size = 50277
 VOCAB_NAME = '20B_tokenizer.json'
@@ -88,7 +88,7 @@ class RWKV_TimeMix(nn.Module):
         
         w = w[:,-T:].unsqueeze(1)
         wkv = F.conv1d(nn.ZeroPad2d((T-1, 0, 0, 0))(kv), w, groups=C)
-        wk = F.conv1d(nn.ZeroPad2d((T-1, 0, 0, 0))(k), w, groups=C) + 1e-9
+        wk = F.conv1d(nn.ZeroPad2d((T-1, 0, 0, 0))(k), w, groups=C) + 1e-8
 
         rwkv = torch.sigmoid(r) * (wkv / wk).transpose(-1, -2)
         
@@ -234,7 +234,7 @@ class RWKV_RNN():
         self.aa[name] = w.time_decay * self.aa[name] + kv
         self.bb[name] = w.time_decay * self.bb[name] + k
 
-        rwkv = r * a / (b + 1e-9)
+        rwkv = r * a / (b + 1e-8)
 
         return w.output.weight @ rwkv
 
