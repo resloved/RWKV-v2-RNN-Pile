@@ -12,8 +12,6 @@ from torch.nn import functional as F
 
 from transformers import PreTrainedTokenizerFast
 
-np.set_printoptions(precision=4, suppress=True, linewidth=200)
-
 ##############################################################################################################
 
 RUN_DEVICE = "cpu"
@@ -25,8 +23,6 @@ MODEL_NAME = "release"
 
 vocab_size = 50277
 VOCAB_NAME = "20B_tokenizer.json"
-
-print(f"\n* running on {RUN_DEVICE}")
 
 ################################################################################################################
 
@@ -129,7 +125,6 @@ class Block(nn.Module):
 class RWKV_GPT(nn.Module):
     def __init__(self, MODEL_NAME=MODEL_NAME):
         super().__init__()
-        print("\nloading RWKV-GPT", MODEL_NAME)
 
         self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=VOCAB_NAME)
         self.emb = nn.Embedding(vocab_size, n_embd)
@@ -163,7 +158,6 @@ time_buf = {}
 
 class RWKV_RNN:
     def __init__(self, MODEL_NAME=MODEL_NAME):
-        print("\nloading RWKV-RNN", MODEL_NAME)
         self.ctx_len = ctx_len
         self.n_layer = n_layer
         self.n_embd = n_embd
