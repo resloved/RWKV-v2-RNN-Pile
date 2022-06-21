@@ -9,7 +9,7 @@ import torch
 from torch.nn import functional as F
 
 
-from src.model import RWKV_RNN
+from model import RWKV_RNN
 
 np.set_printoptions(precision=4, suppress=True, linewidth=200)
 
